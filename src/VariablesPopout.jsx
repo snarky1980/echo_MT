@@ -596,10 +596,13 @@ export default function VariablesPopout({
             let match
             
             while ((match = regex.exec(combinedText)) !== null) {
-              const varName = match[1]
-              if (!seenVars.has(varName) && (selectedTemplate?.variables || []).includes(varName)) {
-                seenVars.add(varName)
-                orderedVars.push(varName)
+              const varNameInText = match[1] // e.g., "client_name_FR"
+              // Strip language suffix to match template.variables format
+              const baseVarName = varNameInText.replace(/_(FR|EN)$/i, '')
+              
+              if (!seenVars.has(baseVarName) && (selectedTemplate?.variables || []).includes(baseVarName)) {
+                seenVars.add(baseVarName)
+                orderedVars.push(baseVarName)
               }
             }
             

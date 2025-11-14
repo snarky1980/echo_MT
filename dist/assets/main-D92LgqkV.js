@@ -22636,7 +22636,27 @@ Shift+click to toggle preference`,
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 overflow-y-auto", style: { padding: varsOnlyMode ? "12px" : "16px" }, children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-3", children: selectedTemplate.variables.map((varName) => {
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-3", children: (() => {
+                var _a2, _b;
+                const subjectText = ((_a2 = selectedTemplate.subject) == null ? void 0 : _a2[templateLanguage]) || "";
+                const bodyText = ((_b = selectedTemplate.body) == null ? void 0 : _b[templateLanguage]) || "";
+                const combinedText = subjectText + "\n" + bodyText;
+                const seenVars = /* @__PURE__ */ new Set();
+                const orderedVars = [];
+                const regex = /<<([^>]+)>>/g;
+                let match;
+                while ((match = regex.exec(combinedText)) !== null) {
+                  const varName = match[1];
+                  if (!seenVars.has(varName) && selectedTemplate.variables.includes(varName)) {
+                    seenVars.add(varName);
+                    orderedVars.push(varName);
+                  }
+                }
+                selectedTemplate.variables.forEach((v) => {
+                  if (!seenVars.has(v)) orderedVars.push(v);
+                });
+                return orderedVars;
+              })().map((varName) => {
                 var _a2, _b, _c, _d;
                 const varInfo = (_a2 = templatesData == null ? void 0 : templatesData.variables) == null ? void 0 : _a2[varName];
                 if (!varInfo) return null;
@@ -23360,7 +23380,27 @@ function VariablesPopout({
         ]
       }
     ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto", children: ((selectedTemplate == null ? void 0 : selectedTemplate.variables) || []).map((varName) => {
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto", children: (() => {
+      var _a, _b;
+      const subjectText = ((_a = selectedTemplate == null ? void 0 : selectedTemplate.subject) == null ? void 0 : _a[templateLanguage]) || "";
+      const bodyText = ((_b = selectedTemplate == null ? void 0 : selectedTemplate.body) == null ? void 0 : _b[templateLanguage]) || "";
+      const combinedText = subjectText + "\n" + bodyText;
+      const seenVars = /* @__PURE__ */ new Set();
+      const orderedVars = [];
+      const regex = /<<([^>]+)>>/g;
+      let match;
+      while ((match = regex.exec(combinedText)) !== null) {
+        const varName = match[1];
+        if (!seenVars.has(varName) && ((selectedTemplate == null ? void 0 : selectedTemplate.variables) || []).includes(varName)) {
+          seenVars.add(varName);
+          orderedVars.push(varName);
+        }
+      }
+      ((selectedTemplate == null ? void 0 : selectedTemplate.variables) || []).forEach((v) => {
+        if (!seenVars.has(v)) orderedVars.push(v);
+      });
+      return orderedVars;
+    })().map((varName) => {
       var _a, _b, _c, _d;
       const varInfo = (_a = templatesData == null ? void 0 : templatesData.variables) == null ? void 0 : _a[varName];
       if (!varInfo) {
@@ -23869,4 +23909,4 @@ const isHelpOnly = params.get("helpOnly") === "1";
 clientExports.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ToastProvider, { children: isVarsOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(VariablesPage, {}) : isHelpOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(HelpPopout, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) })
 );
-//# sourceMappingURL=main-C5E2PhrO.js.map
+//# sourceMappingURL=main-D92LgqkV.js.map

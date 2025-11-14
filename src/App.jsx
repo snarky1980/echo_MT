@@ -4677,8 +4677,32 @@ ${cleanBodyHtml}
             {/* Popup Content - Scrollable Area */}
             <div className="flex-1 overflow-y-auto" style={{ padding: varsOnlyMode ? '12px' : '16px' }}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {selectedTemplate.variables
-                  .map((varName) => {
+                {(() => {
+                  // Extract variables in the order they appear in template text
+                  const subjectText = selectedTemplate.subject?.[templateLanguage] || ''
+                  const bodyText = selectedTemplate.body?.[templateLanguage] || ''
+                  const combinedText = subjectText + '\n' + bodyText
+                  
+                  const seenVars = new Set()
+                  const orderedVars = []
+                  const regex = /<<([^>]+)>>/g
+                  let match
+                  
+                  while ((match = regex.exec(combinedText)) !== null) {
+                    const varName = match[1]
+                    if (!seenVars.has(varName) && selectedTemplate.variables.includes(varName)) {
+                      seenVars.add(varName)
+                      orderedVars.push(varName)
+                    }
+                  }
+                  
+                  // Add any remaining variables not found in text (shouldn't happen normally)
+                  selectedTemplate.variables.forEach(v => {
+                    if (!seenVars.has(v)) orderedVars.push(v)
+                  })
+                  
+                  return orderedVars
+                })().map((varName) => {
                   const varInfo = templatesData?.variables?.[varName]
                   if (!varInfo) return null
                   

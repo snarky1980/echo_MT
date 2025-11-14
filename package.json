@@ -4,10 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "description": "ECHO Email Template Assistant - Professional email template management with rich text editing, AI assistance, and variable management",
-  "homepage": "https://snarky1980.github.io/echo-v1.0.0/",
+  "homepage": "https://echomt.jskennedy.net/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/snarky1980/echo-v1.0.0.git"
+    "url": "https://github.com/snarky1980/echo_MT.git"
   },
   "scripts": {
     "dev": "vite",

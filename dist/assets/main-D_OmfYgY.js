@@ -12869,7 +12869,7 @@ function SectionHeader({ icon: Icon2, title, description }) {
     ] })
   ] });
 }
-function HelpCenter({ language = "fr", onClose, supportEmail = "jskennedy80@gmail.com", contactEndpoint }) {
+function HelpCenter({ language = "fr", onClose, supportEmail = "support@example.com", contactEndpoint }) {
   var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n;
   const strings = reactExports.useMemo(() => translations[language] || translations.fr, [language]);
   const contactOptions = ((_a = strings.contact) == null ? void 0 : _a.options) || [];
@@ -19408,7 +19408,7 @@ function App() {
       }
     } catch {
     }
-    return "jskennedy80@gmail.com";
+    return "support@example.com";
   }, []);
   reactExports.useMemo(() => {
     try {
@@ -23805,7 +23805,7 @@ function HelpPopout() {
   const params2 = new URLSearchParams(window.location.search);
   const langParam = params2.get("lang");
   const language = langParam === "en" ? "en" : "fr";
-  const supportEmail = params2.get("support") || "jskennedy80@gmail.com";
+  const supportEmail = params2.get("support") || "support@example.com";
   const onClose = reactExports.useMemo(() => () => {
     try {
       window.close();
@@ -23869,4 +23869,4 @@ const isHelpOnly = params.get("helpOnly") === "1";
 clientExports.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ToastProvider, { children: isVarsOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(VariablesPage, {}) : isHelpOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(HelpPopout, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) })
 );
-//# sourceMappingURL=main-C5E2PhrO.js.map
+//# sourceMappingURL=main-D_OmfYgY.js.map

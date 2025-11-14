@@ -13005,7 +13005,7 @@ function HelpCenter({ language = "fr", onClose, supportEmail = "jskennedy80@gmai
     }
     setStatus("submitting");
     try {
-      const payload2 = {
+      const payload = {
         category: formData.category,
         categoryLabel: (selectedCategory == null ? void 0 : selectedCategory.label) || formData.category,
         name: formData.name.trim(),
@@ -13017,7 +13017,7 @@ function HelpCenter({ language = "fr", onClose, supportEmail = "jskennedy80@gmai
         product: "ECHO"
       };
       if (formData.category === "template") {
-        payload2.templateDetails = {
+        payload.templateDetails = {
           type: templateDetails.templateType,
           existingId: templateDetails.existingId || void 0,
           languages: Object.keys(templateDetails.languages).filter((k) => templateDetails.languages[k]),
@@ -13037,7 +13037,7 @@ function HelpCenter({ language = "fr", onClose, supportEmail = "jskennedy80@gmai
           "Content-Type": "application/json",
           Accept: "application/json"
         },
-        body: JSON.stringify(payload2)
+        body: JSON.stringify(payload)
       });
       if (!response.ok) {
         throw new Error(`Unexpected status ${response.status}`);
@@ -13063,25 +13063,29 @@ function HelpCenter({ language = "fr", onClose, supportEmail = "jskennedy80@gmai
         deadline: ""
       });
     } catch (error) {
-      console.error("Contact form submission failed:", error);
-      try {
-        const subject = `ECHO ${payload.categoryLabel || payload.category}: ${formData.name}`;
-        const body = `Name: ${payload.name}
-Email: ${payload.email}
+      console.error("Contact form submission failed, using mailto fallback:", error);
+      const subject = `ECHO ${formData.category}: ${formData.name}`;
+      const body = `Name: ${formData.name}
+Email: ${formData.email}
 
-Category: ${payload.categoryLabel || payload.category}
+Category: ${formData.category}
 
 Message:
-${payload.message}
+${formData.message}
 
-${payload.extra ? `Additional info:
-${payload.extra}
+${formData.extra ? `Additional info:
+${formData.extra}
 
-` : ""}${payload.templateDetails ? `
+` : ""}${formData.category === "template" ? `
 Template Details:
-${JSON.stringify(payload.templateDetails, null, 2)}` : ""}`;
-        const mailtoUrl = `mailto:${supportEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        const opened = window.open(mailtoUrl, "_blank");
+Type: ${templateDetails.templateType}
+Languages: ${Object.keys(templateDetails.languages).filter((k) => templateDetails.languages[k]).join(", ")}
+Title (FR): ${templateDetails.titleFr}
+Title (EN): ${templateDetails.titleEn}
+` : ""}`;
+      const mailtoUrl = `mailto:${supportEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+      setTimeout(() => {
         setStatus("success");
         setErrors({});
         setFormData((prev) => ({
@@ -13102,10 +13106,7 @@ ${JSON.stringify(payload.templateDetails, null, 2)}` : ""}`;
           examples: "",
           deadline: ""
         });
-      } catch (mailtoError) {
-        console.error("Mailto fallback failed:", mailtoError);
-        setStatus("error");
-      }
+      }, 100);
     }
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-0 z-[400] flex items-center justify-center px-4 py-6", children: [
@@ -20033,9 +20034,9 @@ function App() {
     const activeTemplateId = ((_a2 = selectedTemplateRef.current) == null ? void 0 : _a2.id) || selectedTemplateId || null;
     const ch = varsChannelRef.current;
     if (!ch) return;
-    const payload2 = { type: "update", templateId: activeTemplateId, templateLanguage, sender: varsSenderIdRef.current };
+    const payload = { type: "update", templateId: activeTemplateId, templateLanguage, sender: varsSenderIdRef.current };
     try {
-      ch.postMessage(payload2);
+      ch.postMessage(payload);
     } catch {
     }
     const popCh = popoutChannelRef.current;
@@ -23929,4 +23930,4 @@ const isHelpOnly = params.get("helpOnly") === "1";
 clientExports.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ToastProvider, { children: isVarsOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(VariablesPage, {}) : isHelpOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(HelpPopout, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) })
 );
-//# sourceMappingURL=main-D1cC8Xju.js.map
+//# sourceMappingURL=main-C89XpnCf.js.map

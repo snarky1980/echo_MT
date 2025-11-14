@@ -607,11 +607,31 @@ export default function HelpCenter({ language = 'fr', onClose, supportEmail = 'j
         const body = `Name: ${payload.name}\nEmail: ${payload.email}\n\nCategory: ${payload.categoryLabel || payload.category}\n\nMessage:\n${payload.message}\n\n${payload.extra ? `Additional info:\n${payload.extra}\n\n` : ''}${payload.templateDetails ? `\nTemplate Details:\n${JSON.stringify(payload.templateDetails, null, 2)}` : ''}`
         
         const mailtoUrl = `mailto:${supportEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-        window.location.href = mailtoUrl
         
-        // Show success message after opening mailto
+        // Open in new window/tab to avoid navigation issues
+        const opened = window.open(mailtoUrl, '_blank')
+        
+        // Show success message
         setStatus('success')
         setErrors({})
+        setFormData((prev) => ({
+          ...prev,
+          message: '',
+          extra: ''
+        }))
+        setTemplateDetails({
+          templateType: 'new',
+          existingId: '',
+          languages: { fr: false, en: false },
+          titleFr: '',
+          titleEn: '',
+          category: '',
+          audience: '',
+          context: '',
+          variablePlan: '',
+          examples: '',
+          deadline: ''
+        })
       } catch (mailtoError) {
         console.error('Mailto fallback failed:', mailtoError)
         setStatus('error')

@@ -22646,10 +22646,11 @@ Shift+click to toggle preference`,
                 const regex = /<<([^>]+)>>/g;
                 let match;
                 while ((match = regex.exec(combinedText)) !== null) {
-                  const varName = match[1];
-                  if (!seenVars.has(varName) && selectedTemplate.variables.includes(varName)) {
-                    seenVars.add(varName);
-                    orderedVars.push(varName);
+                  const varNameInText = match[1];
+                  const baseVarName = varNameInText.replace(/_(FR|EN)$/i, "");
+                  if (!seenVars.has(baseVarName) && selectedTemplate.variables.includes(baseVarName)) {
+                    seenVars.add(baseVarName);
+                    orderedVars.push(baseVarName);
                   }
                 }
                 selectedTemplate.variables.forEach((v) => {
@@ -23390,10 +23391,11 @@ function VariablesPopout({
       const regex = /<<([^>]+)>>/g;
       let match;
       while ((match = regex.exec(combinedText)) !== null) {
-        const varName = match[1];
-        if (!seenVars.has(varName) && ((selectedTemplate == null ? void 0 : selectedTemplate.variables) || []).includes(varName)) {
-          seenVars.add(varName);
-          orderedVars.push(varName);
+        const varNameInText = match[1];
+        const baseVarName = varNameInText.replace(/_(FR|EN)$/i, "");
+        if (!seenVars.has(baseVarName) && ((selectedTemplate == null ? void 0 : selectedTemplate.variables) || []).includes(baseVarName)) {
+          seenVars.add(baseVarName);
+          orderedVars.push(baseVarName);
         }
       }
       ((selectedTemplate == null ? void 0 : selectedTemplate.variables) || []).forEach((v) => {
@@ -23909,4 +23911,4 @@ const isHelpOnly = params.get("helpOnly") === "1";
 clientExports.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ToastProvider, { children: isVarsOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(VariablesPage, {}) : isHelpOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(HelpPopout, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) })
 );
-//# sourceMappingURL=main-D92LgqkV.js.map
+//# sourceMappingURL=main-evbur07v.js.map

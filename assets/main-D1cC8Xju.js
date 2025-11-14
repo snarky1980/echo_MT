@@ -13081,9 +13081,27 @@ ${payload.extra}
 Template Details:
 ${JSON.stringify(payload.templateDetails, null, 2)}` : ""}`;
         const mailtoUrl = `mailto:${supportEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.location.href = mailtoUrl;
+        const opened = window.open(mailtoUrl, "_blank");
         setStatus("success");
         setErrors({});
+        setFormData((prev) => ({
+          ...prev,
+          message: "",
+          extra: ""
+        }));
+        setTemplateDetails({
+          templateType: "new",
+          existingId: "",
+          languages: { fr: false, en: false },
+          titleFr: "",
+          titleEn: "",
+          category: "",
+          audience: "",
+          context: "",
+          variablePlan: "",
+          examples: "",
+          deadline: ""
+        });
       } catch (mailtoError) {
         console.error("Mailto fallback failed:", mailtoError);
         setStatus("error");
@@ -23911,4 +23929,4 @@ const isHelpOnly = params.get("helpOnly") === "1";
 clientExports.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ToastProvider, { children: isVarsOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(VariablesPage, {}) : isHelpOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(HelpPopout, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) })
 );
-//# sourceMappingURL=main-evbur07v.js.map
+//# sourceMappingURL=main-D1cC8Xju.js.map

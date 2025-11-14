@@ -2,8 +2,8 @@
 
 > **Professional email template management with rich text editing, AI assistance, and variable management**
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://snarky1980.github.io/echo-v1.0.0/)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/snarky1980/echo-v1.0.0)
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://echomt.jskennedy.net/)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/snarky1980/echo_MT)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 ---
@@ -68,14 +68,14 @@ All exports preserve rich text formatting (highlights, colors, fonts, etc.):
 ## 🚀 Quick Start
 
 ### Live Demo
-Visit **[https://snarky1980.github.io/echo-v1.0.0/](https://snarky1980.github.io/echo-v1.0.0/)** to use the app immediately!
+Visit **[https://echomt.jskennedy.net/](https://echomt.jskennedy.net/)** to use the app immediately!
 
 ### Local Development
 
 ```bash
 # Clone the repository
-git clone https://github.com/snarky1980/echo-v1.0.0.git
-cd echo-v1.0.0
+git clone https://github.com/snarky1980/echo_MT.git
+cd echo_MT
 
 # Install dependencies
 npm install
@@ -275,7 +275,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- **Issues**: [GitHub Issues](https://github.com/snarky1980/echo-v1.0.0/issues)
+- **Issues**: [GitHub Issues](https://github.com/snarky1980/echo_MT/issues)
 - **Documentation**: Check the `/docs` folder
 - **Help Center**: Available in-app at `help.html`
 
@@ -294,4 +294,4 @@ Built with modern web technologies and best practices:
 
 **Made with ❤️ for professional email communication**
 
-**Live Demo**: [https://snarky1980.github.io/echo-v1.0.0/](https://snarky1980.github.io/echo-v1.0.0/)
+**Live Demo**: [https://echomt.jskennedy.net/](https://echomt.jskennedy.net/)

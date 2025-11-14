@@ -13005,7 +13005,7 @@ function HelpCenter({ language = "fr", onClose, supportEmail = "jskennedy80@gmai
     }
     setStatus("submitting");
     try {
-      const payload = {
+      const payload2 = {
         category: formData.category,
         categoryLabel: (selectedCategory == null ? void 0 : selectedCategory.label) || formData.category,
         name: formData.name.trim(),
@@ -13017,7 +13017,7 @@ function HelpCenter({ language = "fr", onClose, supportEmail = "jskennedy80@gmai
         product: "ECHO"
       };
       if (formData.category === "template") {
-        payload.templateDetails = {
+        payload2.templateDetails = {
           type: templateDetails.templateType,
           existingId: templateDetails.existingId || void 0,
           languages: Object.keys(templateDetails.languages).filter((k) => templateDetails.languages[k]),
@@ -13037,7 +13037,7 @@ function HelpCenter({ language = "fr", onClose, supportEmail = "jskennedy80@gmai
           "Content-Type": "application/json",
           Accept: "application/json"
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload2)
       });
       if (!response.ok) {
         throw new Error(`Unexpected status ${response.status}`);
@@ -13064,7 +13064,30 @@ function HelpCenter({ language = "fr", onClose, supportEmail = "jskennedy80@gmai
       });
     } catch (error) {
       console.error("Contact form submission failed:", error);
-      setStatus("error");
+      try {
+        const subject = `ECHO ${payload.categoryLabel || payload.category}: ${formData.name}`;
+        const body = `Name: ${payload.name}
+Email: ${payload.email}
+
+Category: ${payload.categoryLabel || payload.category}
+
+Message:
+${payload.message}
+
+${payload.extra ? `Additional info:
+${payload.extra}
+
+` : ""}${payload.templateDetails ? `
+Template Details:
+${JSON.stringify(payload.templateDetails, null, 2)}` : ""}`;
+        const mailtoUrl = `mailto:${supportEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoUrl;
+        setStatus("success");
+        setErrors({});
+      } catch (mailtoError) {
+        console.error("Mailto fallback failed:", mailtoError);
+        setStatus("error");
+      }
     }
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-0 z-[400] flex items-center justify-center px-4 py-6", children: [
@@ -19992,9 +20015,9 @@ function App() {
     const activeTemplateId = ((_a2 = selectedTemplateRef.current) == null ? void 0 : _a2.id) || selectedTemplateId || null;
     const ch = varsChannelRef.current;
     if (!ch) return;
-    const payload = { type: "update", templateId: activeTemplateId, templateLanguage, sender: varsSenderIdRef.current };
+    const payload2 = { type: "update", templateId: activeTemplateId, templateLanguage, sender: varsSenderIdRef.current };
     try {
-      ch.postMessage(payload);
+      ch.postMessage(payload2);
     } catch {
     }
     const popCh = popoutChannelRef.current;
@@ -23846,4 +23869,4 @@ const isHelpOnly = params.get("helpOnly") === "1";
 clientExports.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ToastProvider, { children: isVarsOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(VariablesPage, {}) : isHelpOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(HelpPopout, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) })
 );
-//# sourceMappingURL=main-Bvd_sfEB.js.map
+//# sourceMappingURL=main-C5E2PhrO.js.map

@@ -1133,7 +1133,7 @@ function App() {
         if (trimmed) return trimmed
       }
     } catch {}
-    return 'jskennedy80@gmail.com'
+    return 'support@example.com'
   }, [])
   const supportFormEndpoint = useMemo(() => {
     try {

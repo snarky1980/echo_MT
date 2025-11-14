@@ -20234,7 +20234,7 @@ function App() {
     };
     const fetchTemplatesFromSources = async () => {
       if (debug) console.log("[EA][Debug] Fetching templates (prefer raw main data)...");
-      const REPO_RAW_URL = (__vite_import_meta_env__ == null ? void 0 : __vite_import_meta_env__.VITE_TEMPLATES_URL) || "https://raw.githubusercontent.com/snarky1980/echo-v1.0.0/main/complete_email_templates.json";
+      const REPO_RAW_URL = (__vite_import_meta_env__ == null ? void 0 : __vite_import_meta_env__.VITE_TEMPLATES_URL) || "https://raw.githubusercontent.com/snarky1980/echo_MT/main/complete_email_templates.json";
       const LOCAL_URL = "./complete_email_templates.json";
       const BASE_URL = typeof import.meta !== "undefined" && __vite_import_meta_env__ && "/" ? "/" : "/";
       const ABSOLUTE_URL = (BASE_URL.endsWith("/") ? BASE_URL : BASE_URL + "/") + "complete_email_templates.json";
@@ -23846,4 +23846,4 @@ const isHelpOnly = params.get("helpOnly") === "1";
 clientExports.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ToastProvider, { children: isVarsOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(VariablesPage, {}) : isHelpOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(HelpPopout, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) })
 );
-//# sourceMappingURL=main-BpXQmzEX.js.map
+//# sourceMappingURL=main-Bvd_sfEB.js.map

@@ -12890,8 +12890,8 @@ function HelpCenter({ language = "fr", onClose, supportEmail = "jskennedy80@gmai
   }, [contactOptions]);
   const [formData, setFormData] = reactExports.useState(() => ({
     category: initialCategory,
-    name: "",
-    email: "",
+    name: "Manon Lacelle Lacroix",
+    email: "manon.lacellelacroix@marlintravel.ca",
     message: "",
     extra: ""
   }));
@@ -23930,4 +23930,4 @@ const isHelpOnly = params.get("helpOnly") === "1";
 clientExports.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ToastProvider, { children: isVarsOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(VariablesPage, {}) : isHelpOnly ? /* @__PURE__ */ jsxRuntimeExports.jsx(HelpPopout, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) })
 );
-//# sourceMappingURL=main-C89XpnCf.js.map
+//# sourceMappingURL=main-BMaZ2IO5.js.map

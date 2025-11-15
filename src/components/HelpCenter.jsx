@@ -401,8 +401,8 @@ export default function HelpCenter({ language = 'fr', onClose, supportEmail = 'j
   
   const [formData, setFormData] = useState(() => ({
     category: initialCategory,
-    name: '',
-    email: '',
+    name: 'Manon Lacelle Lacroix',
+    email: 'manon.lacellelacroix@marlintravel.ca',
     message: '',
     extra: ''
   }))
